@@ -7,6 +7,7 @@ namespace BTTHUCHANH.Models
     {
         [Key]
         public string id { get; set; }
+        public string idReceipt { get; set; }
         public string idProduct { get; set; }
         public int quantity { get; set; }
     }
