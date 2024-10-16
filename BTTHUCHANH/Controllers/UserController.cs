@@ -21,7 +21,7 @@ namespace BTTHUCHANH.Controllers
         [HttpPost]
         public ActionResult Create([FromBody] JObject json)
         {
-            var model = JsonConvert.DeserializeObject<User>(json.GetValue("data").ToString());
+            var model = JsonConvert.DeserializeObject<UserrManage>(json.GetValue("data").ToString());
             _context.Users.Add(model);
             _context.SaveChanges();
             return Json(model);
@@ -32,7 +32,7 @@ namespace BTTHUCHANH.Controllers
         [HttpPost]
         public ActionResult Edit([FromBody] JObject json)
         {
-            var model = JsonConvert.DeserializeObject<User>(json.GetValue("data").ToString());
+            var model = JsonConvert.DeserializeObject<UserrManage>(json.GetValue("data").ToString());
             _context.Users.Update(model);
             _context.SaveChanges();
             return Json(model);

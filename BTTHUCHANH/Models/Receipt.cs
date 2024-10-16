@@ -8,7 +8,7 @@ namespace BTTHUCHANH.Models
         [Key]
         public string id { get; set; }
         public string userId { get; set; }
-        public string TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
         public string date { get; set; }
     }
 }

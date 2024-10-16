@@ -21,7 +21,7 @@ namespace BTTHUCHANH.DBContext
             base.OnConfiguring(optionsBuilder);
         }
         public DbSet<Product> Products { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserrManage> Users { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<ReceiptDetail> ReceiptDetail {  get; set; }
 
