@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 
 namespace BTTHUCHANH.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ReceiptController : Controller
     {
         private readonly ProductDbContext _context;
@@ -17,7 +19,7 @@ namespace BTTHUCHANH.Controllers
         }
 
         // POST: ProductController/Create
-        [HttpPost]
+        [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<Receipt>(json.GetValue("data").ToString());
@@ -28,7 +30,7 @@ namespace BTTHUCHANH.Controllers
 
 
         // POST: ReceiptController/Edit/5
-        [HttpPost]
+        [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<Receipt>(json.GetValue("data").ToString());
@@ -38,7 +40,7 @@ namespace BTTHUCHANH.Controllers
         }
 
         // POST: ReceiptController/Delete/5
-        [HttpPost]
+        [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
             var id = (json.GetValue("id").ToString());
