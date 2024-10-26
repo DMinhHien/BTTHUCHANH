@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using BTTHUCHANH.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Net.WebSockets;
 namespace BTTHUCHANH.Controllers
 {
     [ApiController]
@@ -23,6 +24,7 @@ namespace BTTHUCHANH.Controllers
         public ActionResult Create([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<Product>(json.GetValue("data").ToString());
+            model.id = Guid.NewGuid().ToString().Substring(0, 10);
             _context.Products.Add(model);
             _context.SaveChanges();
             return Json(model);
@@ -56,10 +58,39 @@ namespace BTTHUCHANH.Controllers
             var result = _context.Products.AsQueryable().
                  Select(d => new
                  {
-                     id = d.id,
-                     name = d.ProductName
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
                  }).ToList();
             return Json(result);
+        }
+        [HttpGet("getCount")]
+        public IActionResult getCount() {
+            int total=_context.Products.Count();
+            return Json(total);
+        }
+        [HttpPost("getPageListUse")]
+        public IActionResult getPageListUse([FromQuery] int pageNumber, [FromQuery] int pageSize)
+        {
+            var result = _context.Products.AsQueryable()
+                .Skip((pageNumber - 1) * pageSize).Take(pageSize).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getElementById/{id}")]
+        public IActionResult getElementById([FromRoute] string id)
+        {
+            var model = _context.Products.AsQueryable().FirstOrDefault(m => m.id == id); ;
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return Json(model);
         }
     }
 }

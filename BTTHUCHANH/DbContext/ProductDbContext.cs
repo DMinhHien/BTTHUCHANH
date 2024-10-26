@@ -17,9 +17,11 @@ namespace BTTHUCHANH.DBContext
 
         }
         public DbSet<Product> Products { get; set; }
-        public DbSet<UserrManage> Users { get; set; }
+        public DbSet<UserManage> Users { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
-        public DbSet<ReceiptDetail> ReceiptDetail {  get; set; }
+        public DbSet<ReceiptDetail> ReceiptDetailS {  get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartDetail> CartDetails { get; set; }
 
 
     }

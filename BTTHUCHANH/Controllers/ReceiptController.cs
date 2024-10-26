@@ -50,6 +50,7 @@ namespace BTTHUCHANH.Controllers
             return Json(result);
 
         }
+        [HttpGet]
         public IActionResult getListUse()
         {
             var result = _context.Receipts.AsQueryable().

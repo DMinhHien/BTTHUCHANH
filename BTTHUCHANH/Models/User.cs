@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace BTTHUCHANH.Models
 {
     [Table("UserManage")]
-    public class UserrManage
+    public class UserManage
     {
         [Key]
         public string id { get; set; }

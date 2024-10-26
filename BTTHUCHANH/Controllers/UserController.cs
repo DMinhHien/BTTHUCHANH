@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace BTTHUCHANH.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class UserController : Controller
     {
         private readonly ProductDbContext _context;
@@ -18,10 +20,10 @@ namespace BTTHUCHANH.Controllers
         }
 
         // POST: ProductController/Create
-        [HttpPost]
+        [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
-            var model = JsonConvert.DeserializeObject<UserrManage>(json.GetValue("data").ToString());
+            var model = JsonConvert.DeserializeObject<UserManage>(json.GetValue("data").ToString());
             _context.Users.Add(model);
             _context.SaveChanges();
             return Json(model);
@@ -29,17 +31,17 @@ namespace BTTHUCHANH.Controllers
 
 
         // POST: UserController/Edit/5
-        [HttpPost]
+        [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
-            var model = JsonConvert.DeserializeObject<UserrManage>(json.GetValue("data").ToString());
+            var model = JsonConvert.DeserializeObject<UserManage>(json.GetValue("data").ToString());
             _context.Users.Update(model);
             _context.SaveChanges();
             return Json(model);
         }
 
         // POST: UserController/Delete/5
-        [HttpPost]
+        [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
             var id = (json.GetValue("id").ToString());
@@ -49,6 +51,7 @@ namespace BTTHUCHANH.Controllers
             return Json(result);
 
         }
+        [HttpGet]
         public IActionResult getListUse()
         {
             var result = _context.Users.AsQueryable().

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BTTHUCHANH.Models
 {
-    [Table("Receipt")]
+    [Table("Cart")]
     public class Cart
     {
         [Key]
